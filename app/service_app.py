@@ -40,7 +40,10 @@ def login():
 
 @app.route("/usersignup", methods=['GET', 'POST'])
 def signup():
-    request_data = request.args
+    if request.method=="GET":
+        request_data = request.args
+    else:
+        request_data = request.get_json()
     print request_data
     db = session_db
     try:
