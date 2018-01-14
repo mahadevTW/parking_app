@@ -30,7 +30,7 @@ def login():
     username = request_data['username']
     password = request_data['password']
 
-    user_object = User.query.filter_by(username=username)
+    user_object = User.query.filter_by(username=username).first()
     if user_object and user_object[0].password == password:
         return jsonify({"success": True, "responseData": [], "errorCode": 200})
     else:
