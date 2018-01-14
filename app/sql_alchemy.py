@@ -16,7 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120))
-    mobile_no = db.Column(db.String(20), unique=True, nullable=False)
+    mobile_no = db.Column(db.String(20))
     address = db.Column(db.String(512))
     created_date = db.Column(DateTime, default=datetime.datetime.utcnow)
     updated_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
