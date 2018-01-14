@@ -1,11 +1,10 @@
 from flask import Flask
 from flask import request
 from  flask import jsonify
-import MySQLdb
-from flask import current_app as app
 from app.init_app import init_app
 from app.sql_alchemy import db, User
 from flask_sqlalchemy import SQLAlchemy
+
 
 app = init_app()
 app.config[
@@ -19,12 +18,12 @@ def hello():
     return "Welcome!"
 
 
-@app.route("/hello")
+@app.route("/api/hello")
 def hi():
     return "Hello word"
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/api/login", methods=['GET', 'POST'])
 def login():
     request_data = request.args
     print request_data
@@ -38,7 +37,7 @@ def login():
         return jsonify({"success": False, "responseData": [], "errorCode": 404})
 
 
-@app.route("/usersignup", methods=['GET', 'POST'])
+@app.route("/api/usersignup", methods=['GET', 'POST'])
 def signup():
     if request.method=="GET":
         request_data = request.args
