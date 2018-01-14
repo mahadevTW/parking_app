@@ -7,12 +7,12 @@ from app.init_app import init_app
 from app.sql_alchemy import db, User
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = init_app()
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = 'mysql://root:as2d2p@127.0.0.1/parkingDb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 session_db = SQLAlchemy(app)
+
 
 @app.route("/")
 def hello():
@@ -30,13 +30,9 @@ def login():
     print request_data
     username = request_data['username']
     password = request_data['password']
-    db = MySQLdb.connect("localhost", "root", "", "demo")
-    cursor = db.cursor()
-    query = "select *from user where username=%s"
-    cursor.execute(query, [username])
-    list_data = list(cursor.fetchall())
-    entry = list_data[0]
-    if entry[0] == username and entry[1] == password:
+
+    user_object = User.query.filter_by(username=username)
+    if user_object and user_object[0].password == password:
         return jsonify({"success": True, "responseData": [], "errorCode": 200})
     else:
         return jsonify({"success": False, "responseData": [], "errorCode": 404})
@@ -46,7 +42,6 @@ def login():
 def signup():
     request_data = request.args
     print request_data
-    import pdb; pdb.set_trace()
     db = session_db
     try:
         user_object = User(username=request_data['username'],
