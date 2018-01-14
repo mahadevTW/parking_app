@@ -10,7 +10,7 @@ cursor.execute("SET sql_notes = 0; ")
 cursor.execute("create database IF NOT EXISTS parkingDb")
 # create table
 cursor.execute("SET sql_notes = 0; ")
-cursor.execute("create table IF NOT EXISTS user (username varchar(70),password varchar(20), mobile_no varchar(20), address varchar(512));")
+cursor.execute("create table IF NOT EXISTS user (username varchar(70) primary key ,password varchar(20), mobile_no varchar(20), address varchar(512));")
 cursor.execute("SET sql_notes = 1; ")
 #insert data
 cursor.execute("insert into user values('admin','pass','9988998899', 'Kesnand, wagholi')")
